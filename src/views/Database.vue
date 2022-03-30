@@ -2,7 +2,7 @@
     <el-container>
         <el-header><nav-bar v-bind:item="activeIndex"></nav-bar></el-header>
         <el-main>
-            <iframe src="http://lbs-pg.standardserve.org/pgadmin4/" id="mobsf" scrolling="yes" frameborder="0" style="height:600px">
+            <iframe src="http://lbs-pg.standardserve.org/pgadmin4" id="mobsf" scrolling="auto" frameborder="0" style="height:600px">
             </iframe>
         </el-main>
         <el-footer>Footer</el-footer>
