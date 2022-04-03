@@ -2,8 +2,9 @@
     <el-container>
         <el-header><nav-bar v-bind:item="activeIndex"></nav-bar></el-header>
         <el-main>
-            <iframe src="http://lbs-pg.standardserve.org/pgadmin4" id="mobsf" scrolling="auto" frameborder="0" style="height:600px">
+            <el-card v-loading="loading"><iframe  src="http://lbs-pg.standardserve.org/pgadmin4" id="mobsf" scrolling="auto" frameborder="0" style="height:800px;width:100%">
             </iframe>
+            </el-card>
         </el-main>
         <el-footer>Footer</el-footer>
     </el-container>
@@ -11,30 +12,37 @@
 
 <script>
 import nav from '../components/nav.vue'
-
+import $ from 'jquery'
 export default {
     components: {
         'nav-bar': nav
     },
     data () {
         return {
-            activeIndex: 'Database'
+            activeIndex: 'Database',
+            loading: true
         }
     },
+
     mounted(){
-        function changeMobsfIframe(){
-            const mobsf = document.getElementById('mobsf');
-            const deviceWidth = document.body.clientWidth;
-            const deviceHeight = document.body.clientHeight;
-            mobsf.style.width = (Number(deviceWidth)-240) + 'px'; //数字是页面布局宽度差值
-            mobsf.style.height = (Number(deviceHeight)-64) + 'px'; //数字是页面布局高度差
-        }
 
-        changeMobsfIframe()
-
-        window.onresize = function(){
-            changeMobsfIframe()
+        const iframe = document.querySelector('#mobsf');
+        // 处理兼容行问题
+        var _this = this;
+        if (iframe.attachEvent) {
+            iframe.attachEvent('onload', function () {
+                // iframe加载完毕以后执行操作
+                _this.loading=false; 
+            })
+            
+        } else {
+            iframe.onload = function () {
+                // iframe加载完毕以后执行操作
+                _this.loading=false;
+            }
+            
         }
+        
     }
 }
 </script>

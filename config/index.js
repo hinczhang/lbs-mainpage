@@ -10,7 +10,12 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/backendLBS': {
+        target: 'http://164.90.171.50:5000',
+        changeOrigin: true
+      }
+    },
 
     // Various Dev Server settings
     host: "127.0.0.1",
@@ -36,11 +41,6 @@ module.exports = {
     cacheBusting: true,
 
     cssSourceMap: true,
-
-    /*
-    * Proxy tables
-    */
-    
   },
 
   build: {
